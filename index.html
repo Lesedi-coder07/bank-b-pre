@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Bank!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+
+
+    <div class="nav"><h1>Bank of B</h1></div>
+    <ul class="nav-list">
+      <li><a href="pages/btc.html">Currencies  </a>
+      <li><a>Stocks</a></li>
+      <li><a>About</a></li>
+
+    </ul>
+    <br>
+
+ <div id="bankApp" class="bank-app">
+    
+    
+    <div class="bal">
+        <h3>Accounts</h3>
+      <ul class="bal-list">
+        <li><p id="savings">Savings: R1000</p></li>
+      
+
+
+      </ul>
+    </div>
+ <br>
+
+    <div class="transact">
+        <h3>Transact</h3>
+        <p id="feedback"></p>
+        <input id="sendInput" type="number" placeholder="Amount">
+        <input id="recepientNo" placeholder="Account Number">
+        <input id="ref" placeholder="Reference">
+        <input type="text" placeholder="Bank">
+        <button id="sendBtn">Send</button>
+
+    </div>
+ </div>
+
+ <div class="alert">
+  <h2 class="alert__title">Alert Title</h2>
+  <p class="alert__message">Alert message goes here.</p>
+  <button class="alert__button">OK</button>
+</div>
+
+
+ <div class="signin">
+    <div class="form">
+        <h2>Sign In</h2>
+      <input id="emailSignIn" placeholder="Email">
+      <input id="userid" placeholder="Account Number">
+      <input id="passSignIn" type="password" placeholder="Password">
+      <button id="submitSignIn">Login</button>
+      <p>Dont have an account? <a id="signUpLink" href="#">Sign up here</a></p>
+    </div>
+
+    
+    <div  id="overlay">
+        <div class="signup">
+            <h2>Sign up</h2>
+            <input type="text" id="emailSignUp" placeholder="Email">
+            <input type="text" id="passSignUp" placeholder="Password">
+            <button id="submitSignUp">Sign up</button>
+            <p>Already have an account? <a onclick="off()" href="#">Sign in</a></p>
+
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-firestore.js"></script>
+        <script src='main.js'></script>
+        <script src='signin.js'></script>
+
+
+</body>
+</html>
