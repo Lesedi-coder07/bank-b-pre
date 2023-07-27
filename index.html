@@ -4,13 +4,14 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Bank!</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1' user-scalable="no">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
 
-    <div class="nav"><h1>Bank of B</h1></div>
+    <div class="nav"><h1> <a>Bank Elo</a></h1></div>
     <ul class="nav-list">
       <li><a href="pages/btc.html">Currencies  </a>
       <li><a>Stocks</a></li>
@@ -19,37 +20,61 @@
     </ul>
     <br>
 
+  <div class="app-wrap">
  <div id="bankApp" class="bank-app">
-    
-    
+  
     <div class="bal">
-        <h3>Accounts</h3>
-      <ul class="bal-list">
+         <h6>Available Balance </h6>
+        <h2 id="savings">R1000.07</h2>
+      <!-- <ul class="bal-list">
         <li><p id="savings">Savings: R1000</p></li>
       
 
 
-      </ul>
+      </ul> -->
+    </div><br>
+    <div class="main_btn_rack">
+      <button id="payBtn" onclick="showModal(document.querySelector('.overlay'))" class="payBtn">Pay</button>
+      <button id="depositBtn" class="depositBtn">Deposit</button>
     </div>
  <br>
+<div class="info-tabs">
+ <div class="tab history">
+   <h2>Transaction History </h2>
+   <div class="transaction-list">
+    <p>
+      Takealot R35
+    </p>
+  </div>
+ </div>
 
-    <div class="transact">
-        <h3>Transact</h3>
+ <div class="tab cards">
+  <h2>Transaction History </h2>
+  <div class="card-list">
+   <p>
+     Takealot R35
+   </p>
+ </div>
+</div>
+</div>
+
+<div class="overlay">
+  <img src="img/close_FILL0_wght400_GRAD0_opsz48.png"id='close_overlay_btn' width="40px" height="40px" class="close-icon">
+    <div class="transact" >
+        <h3>Send Money</h3>
         <p id="feedback"></p>
-        <input id="sendInput" type="number" placeholder="Amount">
-        <input id="recepientNo" placeholder="Account Number">
+        <input id="sendInput" type="number" placeholder="Amount" pattern="[0-9]*" inputmode="numeric">
+        <input id="recepientNo" placeholder="Account Number" type="number" pattern="[0-9]*" inputmode="numeric">
         <input id="ref" placeholder="Reference">
         <input type="text" placeholder="Bank">
         <button id="sendBtn">Send</button>
 
     </div>
+  </div>
  </div>
-
- <div class="alert">
-  <h2 class="alert__title">Alert Title</h2>
-  <p class="alert__message">Alert message goes here.</p>
-  <button class="alert__button">OK</button>
 </div>
+
+<h3 onclick="fakeLogin()">log</h3>
 
 
  <div class="signin">
@@ -57,17 +82,17 @@
         <h2>Sign In</h2>
       <input id="emailSignIn" placeholder="Email">
       <input id="userid" placeholder="Account Number">
-      <input id="passSignIn" type="password" placeholder="Password">
+      <input id="passSignIn" type="password" placeholder="Password"><br>
       <button id="submitSignIn">Login</button>
       <p>Dont have an account? <a id="signUpLink" href="#">Sign up here</a></p>
     </div>
 
     
-    <div  id="overlay">
+    <div id="overlay">
         <div class="signup">
             <h2>Sign up</h2>
             <input type="text" id="emailSignUp" placeholder="Email">
-            <input type="text" id="passSignUp" placeholder="Password">
+            <input type="text" id="passSignUp" placeholder="Password"><br>
             <button id="submitSignUp">Sign up</button>
             <p>Already have an account? <a onclick="off()" href="#">Sign in</a></p>
 

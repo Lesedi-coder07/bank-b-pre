@@ -12,6 +12,7 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   
   const db = firebase.firestore();
+  const auth = firebase.auth();
 
 //Firebase project: giverweb
 let signInBtn = document.getElementById('submitSignIn')
@@ -27,6 +28,14 @@ let loggedIn = false;
 let key;
 let time
 let ini;
+const close_overlay = document.getElementById('close_overlay_btn')
+let appState = 'lobby';
+
+
+close_overlay.addEventListener('click', () => {
+document.querySelector('.overlay').style.display = "none";
+})
+
 //Account
 let sendRef = firebase.database().ref
 signInBtn.addEventListener("click", () => {
@@ -40,6 +49,7 @@ signInWithEmailPassword()
 
 function check() {
     
+  
 
 // let starCountRef = firebase.database().ref(ini.userid);
 // starCountRef.on('value', (snapshot) => {
@@ -52,6 +62,18 @@ function check() {
 
 //Transactions-----------------------------------------------------------------------------------------------------------------------------
 let transactions = []
+
+function showModal (element) {
+    // appState = 'Sending Money'
+    
+    close_overlay.addEventListener('click', ()=> {
+       destroyModal(element)
+    })
+    
+}
+ function destroyModal(element) {
+  element.style.display = 'none';
+}
 
 class transactionComplete {
   constructor(userid, amount, balance, recepient, time, key){
@@ -110,7 +132,7 @@ function send() {
         key = Math.ceil(Math.random() * 3987)
         time = new Date().getUTCHours() + ":" + (new Date().getUTCMinutes);
         ini.balance -= amount;
-        alert("Your balance is now: " + ini.balance)
+        swal("Your balance is now: " + ini.balance)
         document.getElementById("savings").innerHTML = "Savings: R" + ini.balance; 
         let latestTrans = new transactionComplete(ini.userid, amount,ini.balance, recepient, time, key)
         console.log(latestTrans)
@@ -179,7 +201,7 @@ function signInWithEmailPassword() {
     var passwordd = document.getElementById("passSignIn").value
     userid = document.getElementById("userid").value 
     // [START auth_signin_password]
-    firebase.auth().signInWithEmailAndPassword(emaill, passwordd)
+    auth.signInWithEmailAndPassword(emaill, passwordd)
     
       .then((userCredential) => {
         // Signed in
@@ -187,7 +209,7 @@ function signInWithEmailPassword() {
         console.log(userr)
         document.getElementsByClassName("bank-app")[0].style.display= "flex";
         document.getElementsByClassName("signin")[0].style.display= "none"
-        showAlert('Logged in!', `Welcome: ${userid.value}`);
+        swal('Logged in!', `Welcome: ${ini.userid}`, 'success');
         
         loggedIn = true;
       })
@@ -201,26 +223,20 @@ function signInWithEmailPassword() {
     
   }
 
-  function showAlert(title, message) {
-    // Get the alert element
-    const alertEl = document.querySelector('.alert');
-  
-    // Set the title and message text
-    alertEl.querySelector('.alert__title').textContent = title;
-    alertEl.querySelector('.alert__message').textContent = message;
-  
-    // Show the alert
-    alertEl.style.display = 'block';
-    setTimeout(function clearAlert(){
-      alertEl.style.display = 'none'
-    }, 3000)
+  // auth.onAuthStateChanged(user => {
+  //   if (user) {
 
-    // Add an event listener to the button to hide the alert
-    alertEl.querySelector('.alert__button').addEventListener('click', function() {
-      alertEl.style.display = 'none';
-      
-    });
+  //   }
+  // })
+
+
+  function fakeLogin(){
+    document.getElementsByClassName("bank-app")[0].style.display= "flex";
+        document.getElementsByClassName("signin")[0].style.display= "none"
+        swal('Logged in!', `Welcome: ${ini.userid}`, 'success');
+
   }
+
   
 
   var database = firebase.database();

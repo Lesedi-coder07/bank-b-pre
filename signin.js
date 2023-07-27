@@ -12,4 +12,3 @@ function generate(email) {
 }
 
 console.log(code);
-alert("rhjfk")
