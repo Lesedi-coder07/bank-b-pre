@@ -65,7 +65,7 @@ let transactions = []
 
 function showModal (element) {
     // appState = 'Sending Money'
-    
+    element.style.display = 'flex';
     close_overlay.addEventListener('click', ()=> {
        destroyModal(element)
     })
@@ -89,10 +89,10 @@ class transactionComplete {
 //push to database
   updateDB() {
 
-    db.collection("accounts").add({
+    db.collection("accounts").doc(`${ini.userid}`).set({
       "Available Balance": this.balance,
       "Account Number": this.userid,
-      born: 1815
+
   })
   .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
@@ -121,11 +121,12 @@ class transactionComplete {
 function send() {
     recepient = recInput.value;
     amount = amountInput.value;
-    let transactionConfirm = confirm("Are you about to make this transaction?")
+    let transactionConfirm = confirm("Are you about to make this transaction?");
+
     if(transactionConfirm === true){
 
-        if(amount > ini.balance){
-        alert("Insuficient Funds!")
+        if(amount > 500 /*ini.balance*/){
+        swal("OOPS!", 'Insuficient Funds', 'error')
         //feedback.innerHTML = "Insificient Funds!!"
        } else {
         
@@ -207,8 +208,8 @@ function signInWithEmailPassword() {
         // Signed in
         var userr = userCredential.user;
         console.log(userr)
-        document.getElementsByClassName("bank-app")[0].style.display= "flex";
-        document.getElementsByClassName("signin")[0].style.display= "none"
+        // document.getElementsByClassName("bank-app")[0].style.display= "flex";
+        // document.getElementsByClassName("signin")[0].style.display= "none"
         swal('Logged in!', `Welcome: ${ini.userid}`, 'success');
         
         loggedIn = true;
@@ -223,17 +224,31 @@ function signInWithEmailPassword() {
     
   }
 
-  // auth.onAuthStateChanged(user => {
-  //   if (user) {
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      bankUI();
+    } else {
+      signedOutUI();
+    }
+  })
 
-  //   }
-  // })
+  const bankUI = () => {
+    document.getElementsByClassName("bank-app")[0].style.display= "flex";
+      document.getElementsByClassName("signin")[0].style.display= "none"
+  }
+  const signedOutUI = ()=> {
+    document.getElementsByClassName("bank-app")[0].style.display= "none";
+      document.getElementsByClassName("signin")[0].style.display= "flex"
+  }
 
 
   function fakeLogin(){
     document.getElementsByClassName("bank-app")[0].style.display= "flex";
         document.getElementsByClassName("signin")[0].style.display= "none"
-        swal('Logged in!', `Welcome: ${ini.userid}`, 'success');
+        // swal('Logged in!', `Welcome: ${ini.userid}`, 'success');
+        auth.signOut().then(() => {
+          
+        })
 
   }
 
